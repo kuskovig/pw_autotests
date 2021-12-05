@@ -3,12 +3,11 @@ import pytest
 import logging
 import requests
 
+from test_data.payload import payload
 from selenium import webdriver
 
 logging.basicConfig(level=logging.INFO, filename="logs/selenium.log", filemode="w")
 browser_logger = logging.getLogger("BROWSER_LOGGER")
-
-
 
 
 def pytest_addoption(parser):
@@ -36,7 +35,7 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture
-def browser(request):
+def browser(request, auth=False):
     test_name = request.node.name
 
     def teardown():
@@ -80,7 +79,16 @@ def browser(request):
     request.addfinalizer(teardown)
     driver.set_window_size(1960, 1080)
     browser_logger.info(f"==============> Starting {test_name}")
+    if auth:
+        r = requests.request('POST', 'https://planyway.com/api/b/planyway/auth', json=payload)
+        auth_cookie = {i.name: i.value for i in r.cookies}
+        driver.add_cookie(auth_cookie)
     return driver
+
+
+@pytest.fixture(scope='session')
+def browser_auth(request):
+    browser(request, auth=True)
 
 
 @pytest.fixture
