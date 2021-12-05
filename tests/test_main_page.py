@@ -2,6 +2,7 @@ from page_objects.main_page import MainPage
 from page_objects.locators import TrelloAuthorizeWindowLocators
 import allure
 import pytest
+import time
 
 
 @allure.title("Test user can login with correct credentials")
@@ -16,3 +17,10 @@ def test_user_can_open_help_page(browser, url):
     page = MainPage(browser, url)
     page.open()
     page.go_to_help_page()
+
+@pytest.mark.test123
+def test_check_login(browser, auth_cookie, url):
+    page = MainPage(browser, url)
+    page.add_auth_cookie(auth_cookie)
+    page.open("/app")
+    time.sleep(10)

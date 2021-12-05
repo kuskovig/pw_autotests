@@ -1,5 +1,7 @@
 import logging
 import allure
+import requests
+
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -111,3 +113,8 @@ class BasePage:
         element.clear()
         self.logger.info(f"Sending data = '{data}' into '{_locator}' element")
         element.send_keys(data)
+
+    @allure.step("Logging in by adding auth cookie")
+    def add_auth_cookie(self, auth_cookie):
+        self.browser.get('https://planyway.com')
+        self.browser.add_cookie(auth_cookie[0])
