@@ -2,7 +2,7 @@ def get_auth_payload():
     json_payload = {"action": "signIn",
                     "data":
                         {"accountType": "TRELLO",
-                         "trelloToken": "d3c54a73afc4ce1c48c95cf9959f1b842d700f3afb1f744e31068f7b2b9a4231"
+                         "trelloToken": "c56d6251fcdd4ff7470660fbcc678e312a1d6c5de5450374cba2fdc622e2787b"
                          }
                     }
     return json_payload

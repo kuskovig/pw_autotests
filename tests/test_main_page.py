@@ -18,9 +18,12 @@ def test_user_can_open_help_page(browser, url):
     page.open()
     page.go_to_help_page()
 
-@pytest.mark.test123
-def test_check_login(browser, auth_cookie, url):
+@pytest.mark.profile
+@allure.title("User can open profile via his avatar from main page")
+def test_user_can_open_profile(browser, url, auth_cookie):
     page = MainPage(browser, url)
     page.add_auth_cookie(auth_cookie)
-    page.open("/app")
-    time.sleep(10)
+    page.open()
+    page.open_profile()
+
+

@@ -11,6 +11,8 @@ class HeaderLocators:
 class MainPageLocators:
     SIGNIN_BUTTON_HEADER = (By.CSS_SELECTOR, ".home__main a.button")
     SIGN_WITH_TRELLO_BUTTON = (By.CSS_SELECTOR, ".pw-dialog-content button")
+    HEADER_USER_AVATAR = (By.CSS_SELECTOR, "header .avatar-container")
+    PROFILE_POPUP_PROFILE = (By.CSS_SELECTOR, ".profile-popup__actions a[href='/profile']")
 
 
 class TrelloAuthorizeWindowLocators:

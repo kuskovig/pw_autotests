@@ -45,3 +45,9 @@ class MainPage(BasePage):
             )
             raise AssertionError(f"Title didn't change in {timeout} seconds")
         assert self.browser.current_url == self.url + "/help", "Current url doesnt match"
+
+    @allure.step("Opening user profile popup")
+    def open_profile(self):
+        self.wait_for_element_and_click(*MainPageLocators.HEADER_USER_AVATAR)
+        self.wait_for_element_and_click(*MainPageLocators.PROFILE_POPUP_PROFILE)
+
