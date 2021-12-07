@@ -4,6 +4,7 @@ import requests
 
 from selenium import webdriver
 from test_data.payload import payload
+
 logging.basicConfig(level=logging.INFO, filename="logs/selenium.log", filemode="w")
 browser_logger = logging.getLogger("BROWSER_LOGGER")
 
@@ -84,7 +85,6 @@ def browser(request):
 def auth_cookie():
     r = requests.request('POST', 'https://planyway.com/api/b/planyway/auth', json=payload)
     return [{"name": i.name, "value": i.value, "domain": i.domain} for i in r.cookies]
-
 
 
 @pytest.fixture
