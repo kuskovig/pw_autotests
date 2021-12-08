@@ -17,6 +17,10 @@ class MainPageLocators:
     PROFILE_POPUP_SIGNOUT = (By.CSS_SELECTOR, ".profile-popup__actions button")
 
 
+class HomePageLocators:
+    HOME_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "pw-home .pw-board-picker__account-btn")
+    NEW_BOARD_BUTTON = (By.CSS_SELECTOR, "div.pw-board-picker__organization-board-new")
+
 class TrelloAuthorizeWindowLocators:
     AUTHORIZE_TRELLO = (By.CSS_SELECTOR, ".buttons a")
     ACCEPT_AUTHORIZED_TRELLO = (By.CSS_SELECTOR, ".buttons input[name='approve']")

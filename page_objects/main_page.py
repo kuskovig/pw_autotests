@@ -1,9 +1,7 @@
 import allure
 
 from .base_page import BasePage
-from .locators import MainPageLocators
-from .locators import TrelloAuthorizeWindowLocators
-from .locators import HeaderLocators
+from .locators import MainPageLocators, HomePageLocators, TrelloAuthorizeWindowLocators, HeaderLocators
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
@@ -24,7 +22,8 @@ class MainPage(BasePage):
         self.enter_data(*TrelloAuthorizeWindowLocators.PASSWORD_FIELD, credentials["password"])  # Pass Trello password
         self.wait_for_element_and_click(*TrelloAuthorizeWindowLocators.LOGIN_BUTTON)  # Send login + password
         self.wait_for_element_and_click(*TrelloAuthorizeWindowLocators.ACCEPT_AUTHORIZED_TRELLO, 5)  # Authorize app
-        self.wait_for_element(*MainPageLocators.HEADER_USER_AVATAR)  # assert there is user profile button
+        self.browser.switch_to.window(self.browser.window_handles[0])
+        self.wait_for_element(*HomePageLocators.HOME_ACCOUNT_BUTTON, 5)  # assert there is user profile button
 
     @allure.step("Hovering over '{_selector}' element")
     def open_header_dropdown(self, _by, _selector):
