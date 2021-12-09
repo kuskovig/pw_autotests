@@ -23,10 +23,14 @@ class HomePageLocators:
     CREATEBOARD_POPUP_NAME = (By.CSS_SELECTOR, "md-dialog input.pw-input__control")
     CREATEBOARD_POPUP_COLOR = (By.CSS_SELECTOR, "div.pw-dialog-board__backgrounds "
                                                 "div:not(.pw-dialog-board__background-tick)")
+    CREATEBOARD_POPUP_CREATE_BUTTON = (By.CSS_SELECTOR, ".pw-dialog-footer button:nth-child(2)")
     HOMEPAGE_BOARDS = (By.CSS_SELECTOR, "a.pw-board-picker__organization-board")
-    CONTACT_SUPPORT_BUTTON = (By.CSS_SELECTOR, ".pw-home-sidebar div.pw-home-sidebar__button:nth-child(5)")
+    CONTACT_SUPPORT_BUTTON = (By.CSS_SELECTOR, ".pw-home-sidebar div.pw-home-sidebar__button:nth-child(6)")
     CONTACT_SUPPORT_DIALOG = (By.CSS_SELECTOR, "md-dialog.pw-dialog")
     CONTACT_SUPPORT_DIALOG_TITLE = (By.CSS_SELECTOR, ".pw-dialog-header__title")
+    CONTACT_SUPPORT_TEXTAREA = (By.CSS_SELECTOR, ".pw-dialog-feedback__input textarea")
+    CONTACT_SUPPORT_SEND_BUTTON = (By.CSS_SELECTOR, ".pw-dialog-footer button:nth-child(2)")
+    WRONG_LOCATOR = (By.CSS_SELECTOR, "123qwe")
 
 
 class TrelloAuthorizeWindowLocators:
@@ -43,3 +47,13 @@ class TrelloAuthorizeWindowLocators:
 
     INVALID_TRELLO_USER = {"username": "not-a-real-user123@yandex.ru",
                            "password": "not-a-valid-password"}
+
+
+class BoardsPageLocators:
+    BOARD_ACTIONS = (By.CSS_SELECTOR, " .pw-scheduler-sidebar__board-actions-btn")
+    REMOVE_BOARD_BUTTON = (By.CSS_SELECTOR, ".pw-menu-trello-lists-content > md-menu-item:nth-child(2) > "
+                                            "button:nth-child(1)")
+    EDIT_BOARD_BUTTON = (By.CSS_SELECTOR, ".pw-menu-trello-lists-content > md-menu-item:nth-child(1) > "
+                                          "button:nth-child(1)")
+    CONFIRM_BOARD_REMOVE_BUTTON = (By.CSS_SELECTOR, "button.pw-btn:nth-child(2)")
+    ADD_CARD_BUTTON = (By.CSS_SELECTOR, ".pw-split-btn__main-btn-text")

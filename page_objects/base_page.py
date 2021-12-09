@@ -1,7 +1,7 @@
 import logging
 import allure
 import random
-
+import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementNotInteractableException
@@ -21,7 +21,7 @@ class BasePage:
     @allure.step("Saving current url")
     def get_current_url(self):
         self.logger.info("Getting current url")
-        return self.browser.current_url()
+        return self.browser.current_url
 
     @allure.step("Checking if the {_selector} element is present on page")
     def is_element_present(self, _by, _selector):
@@ -52,6 +52,21 @@ class BasePage:
             )
             raise AssertionError(f"Couldn't find element for {timeout} seconds")
         return element
+
+    @allure.step("Waiting for all the {_selector} elements for {timeout} seconds")
+    def wait_for_elements(self, _by, _selector, timeout=2):
+        self.logger.info(f"Waiting for all the {_selector} elements by {_by} for {timeout} seconds")
+        try:
+            elements = WebDriverWait(self.browser, timeout).until(EC.presence_of_all_elements_located((_by, _selector)))
+        except TimeoutException:
+            self.logger.warning(f"Elements weren't found in {timeout} seconds")
+            allure.attach(
+                name=self.browser.session_id,
+                body=self.browser.get_screenshot_as_png(),
+                attachment_type=allure.attachment_type.PNG
+            )
+            raise AssertionError(f"Couldn't find elements for {timeout} seconds")
+        return elements
 
     @allure.step("Waiting for '{_selector}' element to appear and then clicking on it when it becomes clickable")
     def wait_for_element_and_click(self, _by, _selector, timeout=2):
@@ -122,11 +137,23 @@ class BasePage:
         self.browser.get('https://planyway.com')
         self.browser.add_cookie(auth_cookie[0])
 
-    def pick_random_element(self, locator):
+    @allure.step("Picking random element from list")
+    def pick_random_element(self, locator, timeout=2):
         self.logger.info(f"Finding all available elements for {locator}")
-        list_of_elements = self.browser.find_elements(*locator)
-        amount_of_elements = len(list_of_elements)-1
+        list_of_elements = self.wait_for_elements(*locator, timeout)
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable(locator))
+        except ElementNotInteractableException:
+            self.logger.warning(f"Cannot click on element {locator}")
+            allure.attach(
+                name=self.browser.session_id,
+                body=self.browser.get_screenshot_as_png(),
+                attachment_type=allure.attachment_type.PNG
+            )
+            raise AssertionError(f"Cannot click on element {locator}")
+
+        amount_of_elements = len(list_of_elements) - 1
         if amount_of_elements < 0:
-            return list_of_elements[random.randint(0, amount_of_elements)]
-        else:
             raise AssertionError(f"No available elements were found with {locator} ")
+        else:
+            return list_of_elements[random.randint(0, amount_of_elements)]
