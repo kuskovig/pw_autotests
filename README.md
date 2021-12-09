@@ -1,2 +1,3 @@
 # pw_autotests
-final project with pw auto tests
+Автоматизация тестирования для приложения Planyway
+Jenkins + Docker + Selenoid
