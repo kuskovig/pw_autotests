@@ -42,8 +42,8 @@ class HomePage(BasePage):
         self.wait_for_element_and_click(*HomePageLocators.CONTACT_SUPPORT_BUTTON, timeout)
         dialog_popup = self.wait_for_element(*HomePageLocators.CONTACT_SUPPORT_DIALOG)
         dialog_title = dialog_popup.find_element(*HomePageLocators.CONTACT_SUPPORT_DIALOG_TITLE).text
-        assert dialog_title in ["Contact Support", "Связаться с техподдержкой"],\
-            f"{dialog_title} != Contact Support|Связаться с техподдержкой"
+        assert dialog_title == "Contact Support",\
+            f"{dialog_title} != Contact Support"
     
     @allure.step("Sending contact form")
     def try_send_empty_form(self):
