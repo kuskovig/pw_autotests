@@ -1,9 +1,7 @@
 import logging
 import allure
-import requests
+import random
 
-
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementNotInteractableException
@@ -19,6 +17,11 @@ class BasePage:
         with allure.step(f"Opening {self.url}{relative_url} url"):
             self.logger.info(f"Opening {self.url}{relative_url} url")
             self.browser.get(self.url + relative_url)
+
+    @allure.step("Saving current url")
+    def get_current_url(self):
+        self.logger.info("Getting current url")
+        return self.browser.current_url()
 
     @allure.step("Checking if the {_selector} element is present on page")
     def is_element_present(self, _by, _selector):
@@ -118,3 +121,12 @@ class BasePage:
     def add_auth_cookie(self, auth_cookie):
         self.browser.get('https://planyway.com')
         self.browser.add_cookie(auth_cookie[0])
+
+    def pick_random_element(self, locator):
+        self.logger.info(f"Finding all available elements for {locator}")
+        list_of_elements = self.browser.find_elements(*locator)
+        amount_of_elements = len(list_of_elements)-1
+        if amount_of_elements < 0:
+            return list_of_elements[random.randint(0, amount_of_elements)]
+        else:
+            raise AssertionError(f"No available elements were found with {locator} ")

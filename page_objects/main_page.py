@@ -10,7 +10,7 @@ from selenium.common.exceptions import TimeoutException
 class MainPage(BasePage):
 
     def login(self, credentials):
-        self.wait_for_element_and_click(*MainPageLocators.SIGNIN_BUTTON_HEADER)  # Go to app page to login
+        self.wait_for_element_and_click(*MainPageLocators.SIGNIN_BUTTON_HEADER)  # Go to app page to log in
         self.wait_for_element_and_click(*MainPageLocators.SIGN_WITH_TRELLO_BUTTON, 5)  # Open login popup
         self.browser.switch_to.window(self.browser.window_handles[1])  # Switch to Trello auth popup
         self.wait_for_element_and_click(*TrelloAuthorizeWindowLocators.AUTHORIZE_TRELLO)  # Accept login with Trello

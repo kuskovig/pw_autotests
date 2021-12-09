@@ -20,6 +20,14 @@ class MainPageLocators:
 class HomePageLocators:
     HOME_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "pw-home .pw-board-picker__account-btn")
     NEW_BOARD_BUTTON = (By.CSS_SELECTOR, "div.pw-board-picker__organization-board-new")
+    CREATEBOARD_POPUP_NAME = (By.CSS_SELECTOR, "md-dialog input.pw-input__control")
+    CREATEBOARD_POPUP_COLOR = (By.CSS_SELECTOR, "div.pw-dialog-board__backgrounds "
+                                                "div:not(.pw-dialog-board__background-tick)")
+    HOMEPAGE_BOARDS = (By.CSS_SELECTOR, "a.pw-board-picker__organization-board")
+    CONTACT_SUPPORT_BUTTON = (By.CSS_SELECTOR, ".pw-home-sidebar div.pw-home-sidebar__button:nth-child(5)")
+    CONTACT_SUPPORT_DIALOG = (By.CSS_SELECTOR, "md-dialog.pw-dialog")
+    CONTACT_SUPPORT_DIALOG_TITLE = (By.CSS_SELECTOR, ".pw-dialog-header__title")
+
 
 class TrelloAuthorizeWindowLocators:
     AUTHORIZE_TRELLO = (By.CSS_SELECTOR, ".buttons a")
@@ -29,7 +37,9 @@ class TrelloAuthorizeWindowLocators:
     LOGIN_WITH_ATLASSIAN_BUTTON = (By.CSS_SELECTOR, "input#login")
     LOGIN_BUTTON = (By.CSS_SELECTOR, "button#login-submit")
     VALID_TRELLO_USER = {"username": "forpwtest@yandex.ru",
-                         "password": "MyPWPassword"}
+                         "password": "MyPWPassword",
+                         "first_name": "Forpw",
+                         "second_name": "Test"}
 
     INVALID_TRELLO_USER = {"username": "not-a-real-user123@yandex.ru",
                            "password": "not-a-valid-password"}
