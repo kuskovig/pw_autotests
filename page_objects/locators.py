@@ -40,8 +40,8 @@ class TrelloAuthorizeWindowLocators:
     PASSWORD_FIELD = (By.CSS_SELECTOR, "input#password")
     LOGIN_WITH_ATLASSIAN_BUTTON = (By.CSS_SELECTOR, "input#login")
     LOGIN_BUTTON = (By.CSS_SELECTOR, "button#login-submit")
-    VALID_TRELLO_USER = {"username": "forpwtest@yandex.ru",
-                         "password": "MyPWPassword",
+    VALID_TRELLO_USER = {"username": "//",
+                         "password": "//",
                          "first_name": "Forpw",
                          "second_name": "Test"}
 
