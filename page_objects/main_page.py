@@ -11,8 +11,6 @@ class MainPage(BasePage):
 
     def login(self, credentials):
         self.wait_for_element_and_click(*MainPageLocators.SIGNIN_BUTTON_HEADER)  # Go to app page to log in
-        self.wait_for_element_and_click(*MainPageLocators.SIGN_WITH_TRELLO_BUTTON, 5)  # Open login popup
-        self.browser.switch_to.window(self.browser.window_handles[1])  # Switch to Trello auth popup
         self.wait_for_element_and_click(*TrelloAuthorizeWindowLocators.AUTHORIZE_TRELLO)  # Accept login with Trello
         self.enter_data(*TrelloAuthorizeWindowLocators.USERNAME_FIELD, credentials["username"])  # Pass Trello login
         self.wait_for_element_to_be_invisible(*TrelloAuthorizeWindowLocators.PASSWORD_FIELD)  # Wait for Trello to
@@ -22,8 +20,10 @@ class MainPage(BasePage):
         self.enter_data(*TrelloAuthorizeWindowLocators.PASSWORD_FIELD, credentials["password"])  # Pass Trello password
         self.wait_for_element_and_click(*TrelloAuthorizeWindowLocators.LOGIN_BUTTON)  # Send login + password
         self.wait_for_element_and_click(*TrelloAuthorizeWindowLocators.ACCEPT_AUTHORIZED_TRELLO, 5)  # Authorize app
-        self.browser.switch_to.window(self.browser.window_handles[0])
-        self.wait_for_element(*HomePageLocators.HOME_ACCOUNT_BUTTON, 5)  # assert there is user profile button
+
+    def should_be_logged_user_avatar(self):
+        self.wait_for_element(*HomePageLocators.USER_AVATAR_SIDEMENU, 10)
+        assert self.is_element_present(*HomePageLocators.USER_AVATAR_SIDEMENU)
 
     @allure.step("Hovering over '{_selector}' element")
     def open_header_dropdown(self, _by, _selector):

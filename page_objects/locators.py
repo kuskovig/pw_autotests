@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from test_data.get_credentials import credentials
 
 
 class HeaderLocators:
@@ -19,6 +20,7 @@ class MainPageLocators:
 
 class HomePageLocators:
     HOME_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "pw-home .pw-board-picker__account-btn")
+    USER_AVATAR_SIDEMENU = (By.CSS_SELECTOR, "pw-user-avatar")
     NEW_BOARD_BUTTON = (By.CSS_SELECTOR, "div.pw-board-picker__organization-board-new")
     CREATEBOARD_POPUP_NAME = (By.CSS_SELECTOR, "md-dialog input.pw-input__control")
     CREATEBOARD_POPUP_COLOR = (By.CSS_SELECTOR, "div.pw-dialog-board__backgrounds "
@@ -40,10 +42,7 @@ class TrelloAuthorizeWindowLocators:
     PASSWORD_FIELD = (By.CSS_SELECTOR, "input#password")
     LOGIN_WITH_ATLASSIAN_BUTTON = (By.CSS_SELECTOR, "input#login")
     LOGIN_BUTTON = (By.CSS_SELECTOR, "button#login-submit")
-    VALID_TRELLO_USER = {"username": "forpwtest@yandex.ru",
-                         "password": "MyPWPassword",
-                         "first_name": "Forpw",
-                         "second_name": "Test"}
+    VALID_TRELLO_USER = credentials
 
     INVALID_TRELLO_USER = {"username": "not-a-real-user123@yandex.ru",
                            "password": "not-a-valid-password"}

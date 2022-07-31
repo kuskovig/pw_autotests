@@ -5,14 +5,15 @@ import pytest
 import time
 from page_objects.locators import HeaderLocators
 
-
+@pytest.mark.login
 @allure.title("Test user can login with correct credentials")
 def test_user_can_login(browser, url):
     page = MainPage(browser, url)
     page.open()
     page.login(TrelloAuthorizeWindowLocators.VALID_TRELLO_USER)
+    page.should_be_logged_user_avatar()
 
-
+@pytest.mark.profile
 @allure.title("User can open profile via his avatar from main page")
 def test_user_can_open_profile(browser, url, auth_cookie):
     page = MainPage(browser, url)
